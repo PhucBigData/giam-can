@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sổ Tay Giảm Cân Cá Nhân (Khoa Học & Thâm Hụt Calo)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-hover: #0284c7;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --accent: #818cf8;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      background: #0b1120;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #0f172a;
+      padding: 10px 18px;
+      width: 100%;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #334155;
+      color: var(--text);
+      padding: 8px 14px;
+      font-size: 0.85rem;
+    }
+
+    .btn-secondary:hover {
+      background: #475569;
+    }
+
+    .btn-danger-sm {
+      background: transparent;
+      color: var(--danger);
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      border: 1px solid #7f1d1d;
+    }
+
+    .btn-danger-sm:hover {
+      background: #7f1d1d;
+      color: #fff;
+    }
+
+    /* Metric stats */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .metric-box {
+      background: #0b1120;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .metric-val {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .metric-unit {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    .highlight-box {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: #bae6fd;
+    }
+
+    .alert-box {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: #fca5a5;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* Progress bar */
+    .progress-bar-container {
+      background: #0b1120;
+      border-radius: 12px;
+      height: 14px;
+      width: 100%;
+      overflow: hidden;
+      margin: 10px 0;
+      border: 1px solid var(--card-border);
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #38bdf8, #34d399);
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* History table */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: #0b1120;
+      color: var(--text-muted);
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--card-border);
+      font-weight: 600;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #1e293b;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    /* Chart */
+    .chart-box {
+      width: 100%;
+      height: 200px;
+      background: #0b1120;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-top: 12px;
+    }
+
+    svg.chart-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.85rem;
+    }
+
+    .data-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .tag-deficit {
+      background: rgba(52, 211, 153, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    .tag-surplus {
+      background: rgba(248, 113, 113, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(248, 113, 113, 0.3);
+    }
+
+    /* Food tags & quick calories calculator */
+    .quick-food-container {
+      background: #0b1120;
+      border: 1px dashed var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .quick-food-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .food-chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .food-chip {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .food-chip:hover {
+      background: #334155;
+      border-color: var(--primary);
+      color: #38bdf8;
+    }
+
+    .food-chip:active {
+      transform: scale(0.96);
+    }
+
+    .food-chip-reset {
+      background: rgba(248, 113, 113, 0.1);
+      color: #fca5a5;
+      border: 1px solid rgba(248, 113, 113, 0.3);
+    }
+
+    .food-chip-reset:hover {
+      background: #7f1d1d;
+      color: #fff;
+    }
+
+    .hand-guide-box {
+      background: rgba(129, 140, 248, 0.08);
+      border: 1px solid rgba(129, 140, 248, 0.25);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #c7d2fe;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <div class="container">
+    <header>
+      <h1>Sổ Tay Giảm Cân Khoa Học</h1>
+      <p class="subtitle">Tính toán chuyển hóa BMR (Mifflin-St Jeor) • Năng lượng tiêu hao TDEE • Kiểm soát thâm hụt calo cá nhân</p>
+    </header>
+
+    <div class="grid-2">
+      <!-- Cột 1: Thông số cá nhân & Cơ sở khoa học -->
+      <section class="card">
+        <h2 class="card-title">⚙️ Hồ Sơ Chuyển Hóa Cá Nhân</h2>
+        <form id="profileForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="gender">Giới tính sinh học</label>
+              <select id="gender" required>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="age">Tuổi</label>
+              <input type="number" id="age" min="15" max="100" value="25" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="height">Chiều cao (cm)</label>
+              <input type="number" id="height" min="100" max="230" value="178" required>
+            </div>
+            <div class="form-group">
+              <label for="startWeight">Cân nặng ban đầu (kg)</label>
+              <input type="number" id="startWeight" step="0.1" min="30" max="250" value="92.0" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="targetWeight">Cân nặng mục tiêu (kg)</label>
+              <input type="number" id="targetWeight" step="0.1" min="30" max="250" value="69.7" required>
+            </div>
+            <div class="form-group">
+              <label for="activity">Mức độ hoạt động (PAL)</label>
+              <select id="activity" required>
+                <option value="1.2" selected>Ít vận động (Ngồi văn phòng)</option>
+                <option value="1.375">Vận động nhẹ (Tập 1-3 ngày/tuần)</option>
+                <option value="1.55">Vận động vừa (Tập 3-5 ngày/tuần)</option>
+                <option value="1.725">Vận động nhiều (Tập 6-7 ngày/tuần)</option>
+                <option value="1.9">Vận động rất cao (Lao động nặng/VĐV)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="deficitChoice">Mức thâm hụt calo hàng ngày</label>
+            <select id="deficitChoice">
+              <option value="300">Thâm hụt nhẹ (-300 kcal/ngày, ~0.27 kg/tuần)</option>
+              <option value="500" selected>Thâm hụt chuẩn y khoa (-500 kcal/ngày, ~0.45 kg/tuần)</option>
+              <option value="700">Thâm hụt tích cực (-700 kcal/ngày, ~0.63 kg/tuần)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-primary">Cập Nhật Thông Số Chuyển Hóa</button>
+        </form>
+
+        <div id="safetyAlert" class="alert-box">
+          ⚠️ Cảnh báo an toàn: Mức calo mục tiêu đang dưới ngưỡng an toàn sinh lý khuyến nghị (Nam: ≥1500 kcal, Nữ: ≥1200 kcal). Đã tự động điều chỉnh về ngưỡng an toàn.
+        </div>
+
+        <div class="highlight-box">
+          <strong>Cơ sở khoa học:</strong>
+          <ul style="margin-left: 18px; margin-top: 4px; font-size: 0.8rem; line-height: 1.4;">
+            <li>BMR theo phương trình lâm sàng <em>Mifflin-St Jeor</em>.</li>
+            <li>1 kg mỡ sinh học ≈ 7.700 kcal thâm hụt năng lượng.</li>
+            <li>Hỗ trợ cơ chế giảm dần thâm hụt khi cách đích &lt; 2kg để chống đứng cân và bảo vệ trao đổi chất.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Cột 2: Các chỉ số tính toán & Mục tiêu hôm nay -->
+      <section class="card">
+        <h2 class="card-title">📊 Mục Tiêu Năng Lượng Hàng Ngày</h2>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="metric-label">BMR (Chuyển hóa tĩnh)</div>
+            <div class="metric-val" id="bmrDisplay">0</div>
+            <div class="metric-unit">kcal/ngày</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">TDEE (Tiêu hao tổng)</div>
+            <div class="metric-val" id="tdeeDisplay">0</div>
+            <div class="metric-unit">kcal/ngày</div>
+          </div>
+          <div class="metric-box" style="border-color: rgba(56, 189, 248, 0.5);">
+            <div class="metric-label" style="color: var(--primary);">Calo Mục Tiêu Ăn Vào</div>
+            <div class="metric-val" id="targetCalDisplay" style="color: #38bdf8;">0</div>
+            <div class="metric-unit">kcal/ngày</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted);">
+            <span>Tiến độ giảm cân:</span>
+            <span id="progressText">0 / 0 kg (0%)</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; border-top: 1px solid var(--card-border); padding-top: 14px;">
+          <h3 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--accent);">Gợi ý phân bổ chất dinh dưỡng (Macros):</h3>
+          <div class="metric-grid" style="margin-bottom: 0;">
+            <div class="metric-box">
+              <div class="metric-label">Đạm (Protein ~2g/kg)</div>
+              <div class="metric-val" id="proteinDisplay" style="font-size: 1.1rem; color: #a78bfa;">0g</div>
+              <div class="metric-unit">bảo tồn cơ bắp</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Chất béo (Fat ~25%)</div>
+              <div class="metric-val" id="fatDisplay" style="font-size: 1.1rem; color: #f472b6;">0g</div>
+              <div class="metric-unit">ổn định nội tiết</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Tinh bột (Carb)</div>
+              <div class="metric-val" id="carbDisplay" style="font-size: 1.1rem; color: #facc15;">0g</div>
+              <div class="metric-unit">năng lượng vận động</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Hàng dưới: Nhật ký ghi nhận & Biểu đồ tiến độ -->
+    <div class="grid-2">
+      <!-- Nhật ký hôm nay -->
+      <section class="card">
+        <h2 class="card-title">✍️ Ghi Nhận Nhật Ký Hàng Ngày</h2>
+        <form id="logForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="logDate">Ngày ghi</label>
+              <input type="date" id="logDate" required>
+            </div>
+            <div class="form-group">
+              <label for="logWeight">Cân nặng sáng nay (kg)</label>
+              <input type="number" id="logWeight" step="0.1" min="30" max="250" placeholder="VD: 74.5" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="logCalories">Tổng calo đã nạp (kcal)</label>
+              <input type="number" id="logCalories" min="0" max="10000" placeholder="VD: 1795" required>
+            </div>
+            <div class="form-group">
+              <label for="logExercise">Calo đốt thêm từ thể thao (kcal)</label>
+              <input type="number" id="logExercise" min="0" max="3000" value="0">
+            </div>
+          </div>
+
+          <!-- Bộ công cụ ước tính & cộng dồn calo món ăn nhanh -->
+          <div class="quick-food-container">
+            <div class="quick-food-title">
+              <span>🍽️ Chạm để cộng dồn món ăn vào calo hôm nay:</span>
+              <button type="button" class="food-chip food-chip-reset" onclick="resetFoodCalories()">Đặt lại 0</button>
+            </div>
+            
+            <div class="food-chip-group">
+              <span class="food-chip" onclick="addFood('1 Bát cơm', 200)">🍚 1 Bát cơm (+200)</span>
+              <span class="food-chip" onclick="addFood('100g Ức gà', 120)">🍗 100g Ức gà (+120)</span>
+              <span class="food-chip" onclick="addFood('1 Quả trứng', 75)">🥚 1 Trứng (+75)</span>
+              <span class="food-chip" onclick="addFood('100g Thịt bò', 180)">🥩 100g Bò (+180)</span>
+              <span class="food-chip" onclick="addFood('Đĩa rau luộc', 40)">🥗 Rau luộc (+40)</span>
+              <span class="food-chip" onclick="addFood('1 Củ khoai', 130)">🍠 Khoai lang (+130)</span>
+              <span class="food-chip" onclick="addFood('1 Tô phở bò', 480)">🍜 Phở bò (+480)</span>
+              <span class="food-chip" onclick="addFood('1 Suất bún chả', 550)">🥢 Bún chả (+550)</span>
+              <span class="food-chip" onclick="addFood('Cơm tấm sườn', 650)">🍛 Cơm tấm (+650)</span>
+              <span class="food-chip" onclick="addFood('1 Bánh mì thịt', 420)">🥖 Bánh mì (+420)</span>
+              <span class="food-chip" onclick="addFood('Cà phê sữa', 180)">☕ Cafe sữa (+180)</span>
+              <span class="food-chip" onclick="addFood('Trà sữa', 450)">🧋 Trà sữa (+450)</span>
+              <span class="food-chip" onclick="addFood('1 Lon bia', 150)">🍺 1 Lon bia (+150)</span>
+              <span class="food-chip" onclick="addFood('1 Lon coca', 140)">🥤 Nước ngọt (+140)</span>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <select id="foodDropdown" onchange="addSelectedFood(this)">
+                <option value="">🔍 Tra cứu thêm các món khác tại đây...</option>
+                <option value="1 Bát cháo sườn|320">Cháo sườn (320 kcal)</option>
+                <option value="1 Tô bún bò Huế|600">Bún bò Huế (600 kcal)</option>
+                <option value="1 Tô bún riêu|450">Bún riêu cua (450 kcal)</option>
+                <option value="1 Đĩa bánh cuốn|380">Bánh cuốn thịt (380 kcal)</option>
+                <option value="1 Gói xôi mặn|520">Xôi mặn thập cẩm (520 kcal)</option>
+                <option value="1 Tô hủ tiếu|500">Hủ tiếu Nam Vang (500 kcal)</option>
+                <option value="Cơm tấm sườn bì chả|850">Cơm tấm sườn bì chả trứng (850 kcal)</option>
+                <option value="100g Cá phi lê|110">100g Cá basa / điêu hồng (110 kcal)</option>
+                <option value="100g Tôm hấp|90">100g Tôm hấp (90 kcal)</option>
+                <option value="1 Bìa đậu phụ trắng|110">1 Bìa đậu phụ trắng 150g (110 kcal)</option>
+                <option value="1 Quả chuối|90">1 Quả chuối (90 kcal)</option>
+                <option value="1 Quả táo|80">1 Quả táo (80 kcal)</option>
+                <option value="Trà đá / Cafe đen|5">Trà đá / Cà phê đen không đường (5 kcal)</option>
+              </select>
+            </div>
+          </div>
+
+          <details class="hand-guide-box" style="margin-bottom: 14px;">
+            <summary style="cursor: pointer; font-weight: 600; color: #818cf8;">
+              ✋ Hướng dẫn ước lượng Calo bằng lòng bàn tay (Khi ăn ngoài)
+            </summary>
+            <div style="margin-top: 8px; font-size: 0.78rem; line-height: 1.5; color: #cbd5e1;">
+              • <strong>1 Lòng bàn tay (thịt/cá/đậu):</strong> ~100-120g $\rightarrow$ 25g đạm (khoảng 150-180 kcal).<br>
+              • <strong>1 Nắm đấm tay (cơm/khoai/mì):</strong> ~1 bát cơm $\rightarrow$ 35g carb (khoảng 180-200 kcal).<br>
+              • <strong>2 Bàn tay khum lại (rau củ):</strong> xà lách, rau luộc (khoảng 30-50 kcal) - Ăn thoải mái.<br>
+              • <strong>1 Đầu ngón tay cái (chất béo):</strong> dầu ăn, bơ, sốt mayonnaise (khoảng 100-120 kcal) - Nên hạn chế.<br>
+              • <strong>⚠️ Bẫy calo trong đồ uống:</strong> Nước lọc / trà đá = 0 kcal. Cà phê sữa = 180 kcal. Trà sữa trân châu = 450-550 kcal (bằng 1 tô phở!).
+            </div>
+          </details>
+
+          <div class="form-group">
+            <label for="logNote">Ghi chú bữa ăn hoặc cảm nhận (tùy chọn)</label>
+            <input type="text" id="logNote" placeholder="VD: Ăn ức gà, rau luộc, chạy bộ 30p">
+          </div>
+
+          <button type="submit" class="btn-primary" style="background: var(--success); color: #064e3b;">Lưu Nhật Ký Ngày Này</button>
+        </form>
+      </section>
+
+      <!-- Biểu đồ biến động cân nặng -->
+      <section class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <h2 class="card-title" style="margin-bottom: 0;">📈 Biểu Đồ Cân Nặng Thực Tế</h2>
+          <span style="font-size: 0.75rem; color: var(--text-muted);" id="chartStats">Đang cập nhật...</span>
+        </div>
+        <div class="chart-box" id="chartContainer">
+          <svg class="chart-svg" id="weightChart" viewBox="0 0 450 180" preserveAspectRatio="none">
+            <text x="225" y="90" text-anchor="middle" fill="#64748b" font-size="12">Chưa có đủ dữ liệu để vẽ biểu đồ</text>
+          </svg>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: center;">
+          Mẹo: Cân nặng hàng ngày có thể biến động do nước và muối. Hãy chú ý đến đường xu hướng trung bình theo tuần!
+        </div>
+      </section>
+    </div>
+
+    <!-- Bảng lịch sử dữ liệu -->
+    <section class="card" style="margin-top: 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 class="card-title" style="margin-bottom: 0;">📑 Lịch Sử Theo Dõi</h2>
+        <span style="font-size: 0.8rem; color: var(--text-muted);" id="logCount">0 ngày được ghi nhận</span>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Ngày</th>
+              <th>Cân nặng</th>
+              <th>Calo ăn vào</th>
+              <th>Đốt thể thao</th>
+              <th>Thâm hụt thực tế</th>
+              <th>Ghi chú</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody">
+            <tr>
+              <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">Chưa có dữ liệu nhật ký. Hãy nhập ngày đầu tiên của bạn ở trên!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="action-row">
+        <span style="color: var(--text-muted);">Dữ liệu được lưu trữ trực tiếp trên trình duyệt của bạn (LocalStorage).</span>
+        <div class="data-actions">
+          <button class="btn-secondary" id="exportBtn" onclick="exportData()">💾 Xuất file Backup (JSON)</button>
+          <button class="btn-secondary" id="importBtn" onclick="document.getElementById('importFile').click()">📥 Nhập lại Backup</button>
+          <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Khởi tạo các khóa lưu trữ
+    const STORAGE_PROFILE_KEY = "weight_loss_profile_v1";
+    const STORAGE_LOGS_KEY = "weight_loss_logs_v1";
+
+    // Giá trị mặc định cá nhân hóa
+    const defaultProfile = {
+      gender: "male",
+      age: 25,
+      height: 178,
+      startWeight: 92.0,
+      targetWeight: 69.7,
+      activity: 1.2,
+      deficitChoice: 500
+    };
+
+    let profile = loadProfile();
+    let logs = loadLogs();
+
+    // Thiết lập ngày hôm nay cho form nhật ký
+    document.getElementById("logDate").valueAsDate = new Date();
+
+    function loadProfile() {
+      try {
+        const raw = localStorage.getItem(STORAGE_PROFILE_KEY);
+        return raw ? JSON.parse(raw) : { ...defaultProfile };
+      } catch (e) {
+        return { ...defaultProfile };
+      }
+    }
+
+    function saveProfile(data) {
+      profile = data;
+      localStorage.setItem(STORAGE_PROFILE_KEY, JSON.stringify(profile));
+      calculateAndRender();
+    }
+
+    function loadLogs() {
+      try {
+        const raw = localStorage.getItem(STORAGE_LOGS_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveLogs(data) {
+      logs = data;
+      localStorage.setItem(STORAGE_LOGS_KEY, JSON.stringify(logs));
+      renderLogsTable();
+      renderChart();
+      updateProgress();
+    }
+
+    // Tính toán theo công thức khoa học Mifflin-St Jeor
+    function calculateMifflinStJeor(gender, weightKg, heightCm, ageYears) {
+      if (gender === "male") {
+        return (10 * weightKg) + (6.25 * heightCm) - (5 * ageYears) + 5;
+      } else {
+        return (10 * weightKg) + (6.25 * heightCm) - (5 * ageYears) - 161;
+      }
+    }
+
+    function calculateAndRender() {
+      // Đổ dữ liệu vào form profile
+      document.getElementById("gender").value = profile.gender;
+      document.getElementById("age").value = profile.age;
+      document.getElementById("height").value = profile.height;
+      document.getElementById("startWeight").value = profile.startWeight;
+      document.getElementById("targetWeight").value = profile.targetWeight;
+      document.getElementById("activity").value = profile.activity;
+      document.getElementById("deficitChoice").value = profile.deficitChoice;
+
+      // Tìm cân nặng gần nhất từ nhật ký (nếu có) để tính chuyển hóa hiện tại
+      let currentWeight = profile.startWeight;
+      if (logs.length > 0) {
+        // sắp xếp theo ngày gần nhất
+        const sorted = [...logs].sort((a, b) => new Date(b.date) - new Date(a.date));
+        currentWeight = sorted[0].weight;
+      }
+
+      // 1. Tính BMR
+      const bmr = calculateMifflinStJeor(profile.gender, currentWeight, profile.height, profile.age);
+
+      // 2. Tính TDEE
+      const tdee = bmr * parseFloat(profile.activity);
+
+      // 3. Cơ chế Tapering khi gần đến đích
+      let deficit = parseFloat(profile.deficitChoice);
+      const diffToTarget = Math.abs(currentWeight - profile.targetWeight);
+      if (diffToTarget < 2.0 && diffToTarget > 0) {
+        // Giảm dần mức thâm hụt khi còn dưới 2kg để cơ thể thích nghi với giai đoạn duy trì
+        deficit = deficit * (diffToTarget / 2.0);
+      } else if (currentWeight <= profile.targetWeight) {
+        deficit = 0; // Đã đạt mục tiêu, chuyển sang duy trì
+      }
+
+      let targetCalories = Math.round(tdee - deficit);
+
+      // 4. Kiểm tra ngưỡng sàn an toàn y khoa (1500 kcal cho nam, 1200 kcal cho nữ)
+      const floorKcal = profile.gender === "male" ? 1500 : 1200;
+      const alertEl = document.getElementById("safetyAlert");
+      if (targetCalories < floorKcal) {
+        targetCalories = floorKcal;
+        alertEl.style.display = "block";
+      } else {
+        alertEl.style.display = "none";
+      }
+
+      // Hiển thị kết quả lên giao diện
+      document.getElementById("bmrDisplay").textContent = Math.round(bmr);
+      document.getElementById("tdeeDisplay").textContent = Math.round(tdee);
+      document.getElementById("targetCalDisplay").textContent = targetCalories;
+
+      // Phân bổ Macronutrients (Đạm 2g/kg cân nặng; Chất béo 25% calo; Tinh bột phần còn lại)
+      const proteinGrams = Math.round(currentWeight * 2.0);
+      const proteinKcal = proteinGrams * 4;
+
+      const fatKcal = targetCalories * 0.25;
+      const fatGrams = Math.round(fatKcal / 9);
+
+      const carbKcal = Math.max(0, targetCalories - proteinKcal - fatKcal);
+      const carbGrams = Math.round(carbKcal / 4);
+
+      document.getElementById("proteinDisplay").textContent = proteinGrams + "g";
+      document.getElementById("fatDisplay").textContent = fatGrams + "g";
+      document.getElementById("carbDisplay").textContent = carbGrams + "g";
+
+      updateProgress(currentWeight);
+    }
+
+    function updateProgress(currW) {
+      let currentWeight = currW;
+      if (!currentWeight) {
+        currentWeight = profile.startWeight;
+        if (logs.length > 0) {
+          const sorted = [...logs].sort((a, b) => new Date(b.date) - new Date(a.date));
+          currentWeight = sorted[0].weight;
+        }
+      }
+
+      const totalNeedToLose = profile.startWeight - profile.targetWeight;
+      const actualLost = profile.startWeight - currentWeight;
+
+      let pct = 0;
+      if (totalNeedToLose > 0) {
+        pct = Math.max(0, Math.min(100, Math.round((actualLost / totalNeedToLose) * 100)));
+      }
+
+      document.getElementById("progressBar").style.width = pct + "%";
+      document.getElementById("progressText").textContent = 
+        `${actualLost > 0 ? actualLost.toFixed(1) : 0} / ${totalNeedToLose.toFixed(1)} kg (${pct}%) • Hiện tại: ${currentWeight.toFixed(1)} kg`;
+    }
+
+    function renderLogsTable() {
+      const tbody = document.getElementById("logTableBody");
+      document.getElementById("logCount").textContent = `${logs.length} ngày được ghi nhận`;
+
+      if (logs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">Chưa có dữ liệu nhật ký. Hãy nhập ngày đầu tiên của bạn ở trên!</td></tr>`;
+        return;
+      }
+
+      // Sắp xếp ngày mới nhất lên đầu
+      const sorted = [...logs].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // Lấy TDEE gần đúng để so sánh thâm hụt
+      const currentTdee = parseFloat(document.getElementById("tdeeDisplay").textContent) || 2000;
+
+      let html = "";
+      sorted.forEach((item) => {
+        const totalBurn = currentTdee + (item.exercise || 0);
+        const netDeficit = totalBurn - item.calories;
+        const isDeficit = netDeficit >= 0;
+
+        html += `
+          <tr>
+            <td><strong>${item.date}</strong></td>
+            <td>${item.weight.toFixed(1)} kg</td>
+            <td>${item.calories} kcal</td>
+            <td>${item.exercise ? "+" + item.exercise + " kcal" : "—"}</td>
+            <td>
+              <span class="tag ${isDeficit ? 'tag-deficit' : 'tag-surplus'}">
+                ${isDeficit ? 'Thâm hụt -' + Math.round(netDeficit) : 'Dư thừa +' + Math.round(Math.abs(netDeficit))} kcal
+              </span>
+            </td>
+            <td>${item.note || "—"}</td>
+            <td>
+              <button class="btn-danger-sm" onclick="deleteLog('${item.id}')">Xóa</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    function renderChart() {
+      const svg = document.getElementById("weightChart");
+      const statsEl = document.getElementById("chartStats");
+
+      if (logs.length < 2) {
+        svg.innerHTML = `<text x="225" y="90" text-anchor="middle" fill="#64748b" font-size="12">Cần ít nhất 2 ngày ghi nhận để vẽ đường xu hướng cân nặng</text>`;
+        statsEl.textContent = "Chưa đủ dữ liệu";
+        return;
+      }
+
+      // Sắp xếp từ ngày cũ đến ngày mới
+      const sorted = [...logs].sort((a, b) => new Date(a.date) - new Date(b.date));
+      const weights = sorted.map(d => d.weight);
+
+      const minW = Math.min(...weights, profile.targetWeight) - 1.0;
+      const maxW = Math.max(...weights, profile.startWeight) + 1.0;
+      const wRange = maxW - minW || 1;
+
+      const width = 450;
+      const height = 180;
+      const padLeft = 40;
+      const padRight = 20;
+      const padTop = 20;
+      const padBottom = 30;
+
+      const plotW = width - padLeft - padRight;
+      const plotH = height - padTop - padBottom;
+
+      const getX = (idx) => padLeft + (idx / (sorted.length - 1)) * plotW;
+      const getY = (w) => padTop + plotH - ((w - minW) / wRange) * plotH;
+
+      // Tạo đường polyline
+      const points = sorted.map((d, i) => `${getX(i).toFixed(1)},${getY(d.weight).toFixed(1)}`).join(" ");
+
+      // Đường mục tiêu (target line)
+      const targetY = getY(profile.targetWeight);
+
+      let svgContent = `
+        <!-- Trục ngang mục tiêu -->
+        <line x1="${padLeft}" y1="${targetY}" x2="${width - padRight}" y2="${targetY}" stroke="#34d399" stroke-dasharray="4,4" stroke-width="1.5" />
+        <text x="${padLeft + 4}" y="${targetY - 5}" fill="#34d399" font-size="10">Mục tiêu: ${profile.targetWeight}kg</text>
+
+        <!-- Trục tọa độ -->
+        <line x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + plotH}" stroke="#334155" stroke-width="1" />
+        <line x1="${padLeft}" y1="${padTop + plotH}" x2="${width - padRight}" y2="${padTop + plotH}" stroke="#334155" stroke-width="1" />
+
+        <!-- Điểm mốc Y -->
+        <text x="${padLeft - 6}" y="${padTop + 10}" text-anchor="end" fill="#64748b" font-size="9">${maxW.toFixed(0)}</text>
+        <text x="${padLeft - 6}" y="${padTop + plotH}" text-anchor="end" fill="#64748b" font-size="9">${minW.toFixed(0)}</text>
+
+        <!-- Đường nối các mốc cân nặng -->
+        <polyline fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${points}" />
+      `;
+
+      // Các điểm chấm tròn
+      sorted.forEach((d, i) => {
+        const cx = getX(i);
+        const cy = getY(d.weight);
+        svgContent += `
+          <circle cx="${cx}" cy="${cy}" r="3.5" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
+        `;
+      });
+
+      svg.innerHTML = svgContent;
+
+      const firstW = sorted[0].weight;
+      const lastW = sorted[sorted.length - 1].weight;
+      const diff = lastW - firstW;
+      statsEl.textContent = `Thay đổi: ${diff <= 0 ? diff.toFixed(1) : '+' + diff.toFixed(1)} kg (${sorted[0].date} ➔ ${sorted[sorted.length - 1].date})`;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    // Tiện ích cộng dồn calo món ăn
+    function addFood(name, kcal) {
+      const calInput = document.getElementById("logCalories");
+      const noteInput = document.getElementById("logNote");
+      
+      const currentCal = parseInt(calInput.value, 10) || 0;
+      calInput.value = currentCal + kcal;
+
+      if (noteInput.value.trim() === "") {
+        noteInput.value = name;
+      } else {
+        noteInput.value += ", " + name;
+      }
+      showToast(`+${kcal} kcal (${name})`);
+    }
+
+    function addSelectedFood(selectEl) {
+      if (!selectEl.value) return;
+      const parts = selectEl.value.split("|");
+      addFood(parts[0], parseInt(parts[1], 10));
+      selectEl.value = "";
+    }
+
+    function resetFoodCalories() {
+      document.getElementById("logCalories").value = "";
+      document.getElementById("logNote").value = "";
+      showToast("Đã đặt lại ô calo và ghi chú về 0.");
+    }
+
+    // Xử lý nộp form Profile
+    document.getElementById("profileForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const updated = {
+        gender: document.getElementById("gender").value,
+        age: parseInt(document.getElementById("age").value, 10),
+        height: parseFloat(document.getElementById("height").value),
+        startWeight: parseFloat(document.getElementById("startWeight").value),
+        targetWeight: parseFloat(document.getElementById("targetWeight").value),
+        activity: parseFloat(document.getElementById("activity").value),
+        deficitChoice: parseFloat(document.getElementById("deficitChoice").value)
+      };
+      saveProfile(updated);
+      showToast("✓ Đã cập nhật hồ sơ cá nhân và tính lại chỉ số!");
+    });
+
+    // Xử lý nộp form Nhật ký
+    document.getElementById("logForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const dateVal = document.getElementById("logDate").value;
+      const weightVal = parseFloat(document.getElementById("logWeight").value);
+      const calVal = parseInt(document.getElementById("logCalories").value, 10);
+      const exVal = parseInt(document.getElementById("logExercise").value, 10) || 0;
+      const noteVal = document.getElementById("logNote").value.trim();
+
+      // Kiểm tra trùng ngày -> nếu trùng ngày thì cập nhật bản ghi đó
+      const existingIdx = logs.findIndex(x => x.date === dateVal);
+      const newEntry = {
+        id: existingIdx >= 0 ? logs[existingIdx].id : Date.now().toString(),
+        date: dateVal,
+        weight: weightVal,
+        calories: calVal,
+        exercise: exVal,
+        note: noteVal
+      };
+
+      let newLogs = [...logs];
+      if (existingIdx >= 0) {
+        newLogs[existingIdx] = newEntry;
+      } else {
+        newLogs.push(newEntry);
+      }
+
+      saveLogs(newLogs);
+      calculateAndRender();
+
+      // Reset ô nhập liệu phụ
+      document.getElementById("logNote").value = "";
+      showToast("✓ Đã lưu nhật ký ngày " + dateVal);
+    });
+
+    function deleteLog(id) {
+      if (confirm("Bạn có chắc chắn muốn xóa bản ghi này?")) {
+        const filtered = logs.filter(x => x.id !== id);
+        saveLogs(filtered);
+        calculateAndRender();
+        showToast("✓ Đã xóa bản ghi.");
+      }
+    }
+
+    // Sao lưu dữ liệu
+    function exportData() {
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        profile: profile,
+        logs: logs
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `giam_can_backup_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("✓ Đã tải file sao lưu về máy.");
+    }
+
+    // Nhập dữ liệu sao lưu
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported.profile && Array.isArray(imported.logs)) {
+            saveProfile(imported.profile);
+            saveLogs(imported.logs);
+            showToast("✓ Đã khôi phục dữ liệu thành công!");
+          } else {
+            showToast("⚠️ Định dạng file sao lưu không hợp lệ.");
+          }
+        } catch (err) {
+          showToast("⚠️ Lỗi khi đọc file: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = "";
+    }
+
+    // Khởi chạy khi load trang
+    calculateAndRender();
+    renderLogsTable();
+    renderChart();
+  </script>
+</body>
+</html>
